@@ -1,0 +1,64 @@
+<div ng-hide="visible" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div layout="column" layout-align="center center" ng-cloak ng-hide="!visible">
+	<div class="videoDiv" layout="row">
+		<div>
+			<img src="files/videosPosters/{{video.posterUrl}}" alt="">
+		</div>
+		<div>
+			<span class="videoInfo"><b>Name:</b> {{video.name}}</span>
+			<span class="videoInfo"><b>Country:</b> {{video.country}}</span>
+			<span class="videoInfo"><b>Director:</b> {{video.director}}</span>
+			<span class="videoInfo"><b>Duration:</b> {{video.duration}}</span>
+			<span class="videoInfo"><b>Premiere year:</b> {{video.date}}</span>
+			<span class="videoInfo"><b>Description:</b> 
+				<div class="descriptionDiv">
+					<div class="descriptionSpan">{{video.description}}</div>
+				</div>
+			</span>
+			<span class="videoInfo" layout="row" layout-align="start start">
+				<b>Actors: </b>
+				<div>
+					<p class="actors" ng-repeat="actor in actors">{{actor.name}}</p>
+				</div>	
+			</span>
+		</div>
+	</div>
+	<div class="workPanel">
+		<md-button ng-click="like()" class="md-icon-button" aria-label="More">
+	        <md-icon class="heartIcon" ng-if="!likeStatus" md-svg-icon="files/icons/heart-outline.svg"></md-icon>
+	        <md-icon class="heartIcon" ng-if="likeStatus" md-svg-icon="files/icons/heart.svg"></md-icon>
+	        {{likes}}
+	    </md-button>
+	    <md-button ng-click="favorites()" class="md-icon-button" aria-label="More">
+	        <md-icon class="starIcon" ng-if="!favoritesStatus" md-svg-icon="files/icons/star-outline.svg"></md-icon>
+	        <md-icon class="starIcon" ng-if="favoritesStatus" md-svg-icon="files/icons/star.svg"></md-icon>
+	    </md-button>
+	    <span><md-icon md-svg-icon="files/icons/eye.svg"></md-icon>{{watchings}}</span>
+	</div>
+	<div class="videoWatch">
+		<video played="{{watch()}}" width="700" controls ng-src="{{video.videoSrc}}">
+			Sorry,Your browser can't play this video.
+		</video>
+	</div>
+	<div layout="column" class="commentDiv">
+		<md-input-container md-no-float md-is-error="!commentString">
+			<md-icon md-svg-icon="files/icons/comment-text.svg"></md-icon>
+			<input type="text" aria-label="Comment" placeholder="write comment" class="commentInput" ng-change="checkEmptyComment()" ng-model="commentString">
+		</md-input-container>
+		<md-button ng-click="comment()" class="md-raised">Add comment</md-button>
+		<div layout="column" ng-repeat="comment in comments">
+			<div>
+				<md-icon md-svg-icon="files/icons/account.svg"></md-icon>
+				<b>{{comment.userName}}</b>
+			</dov>
+			<div layout="column" class="commentStrDiv" layout-align="center center">
+				<div class="commentSpan">{{comment.commentString}}</div>
+			</div>
+			<div layout="row" layout-align="end center">
+				<p>{{comment.commentDate}}</p>
+			</div>
+		</div>
+	</div>
+<div>

@@ -1,0 +1,69 @@
+<div ng-hide="visible" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div ng-cloak layout="row" layout-align="space-around start" layout-sm="column" ng-hide="!visible">
+	<div class="tabs">
+		<md-tabs md-dynamic-height md-border-bottom>
+			<md-tab label="videos">
+				<div class="videos">
+					<md-card class="popularCards" layout="row" layout-align="center center" ng-repeat="video in videos">
+					    <md-card-title>
+					       	<md-card-title-text>
+						        <span class="md-headline">
+						          	{{video.name}} 
+						        </span>
+					        </md-card-title-text>
+					        <md-card-title-media>
+						        <div class="md-media-xl card-media">
+						          	<a  ng-href="#/video/{{video.videoId}}"><img class="md-card-image popularPosters" ng-src="{{video.posterUrl}}" alt="{{video.name}}"></a>
+						        </div>
+						    </md-card-title-media>
+						</md-card-title>  		
+					</md-card>
+				</div>
+			</md-tab>
+			<md-tab label="albums">
+				<div class="albums">
+					<md-card class="popularCards" layout="row" layout-align="center center" ng-repeat="album in albums">
+					    <md-card-title>
+					       	<md-card-title-text>
+						        <span class="md-headline">
+						          	{{album.name}} 
+						        </span>
+					        </md-card-title-text>
+					        <md-card-title-media>
+						        <div class="md-media-xl card-media">
+						          	<a  ng-href="#/album/{{album.albumId}}"><img class="md-card-image popularAlbumPosters" ng-src="{{album.posterUrl}}" alt="{{album.name}}"></a>
+						        </div>
+						    </md-card-title-media>
+						</md-card-title>  		
+					</md-card>
+				</div>
+			</md-tab>
+		</md-tabs>
+	</div>
+	<div class="md-warn" ng-if="songs.length>0" layout="column" layout-align="start center">
+		<div layout="row" layout-align="center center">
+			<h1>TOP 30</h1>
+		</div>
+		<div ng-repeat="song in songs" layout="column">
+			<div layout="row" layout-align="center center">
+				<div layout="column" class="songNameDiv" layout-align="center center">
+					<div class="songNameSpan">{{song.singers}} - <b>{{song.name}}</b></div>
+				</div>
+				<md-button ng-click="likeSong(song.songId)" class="md-icon-button" aria-label="Like">
+			        <md-icon class="heartIcon" ng-if="song.canLike" md-svg-icon="files/icons/heart-outline.svg"></md-icon>
+			        <md-icon class="heartIcon" ng-if="!song.canLike" md-svg-icon="files/icons/heart.svg"></md-icon>
+			        {{song.songLikes}}
+			    </md-button>
+				<md-button ng-click="favoriteSong(song.songId)" class="md-icon-button" aria-label="favorite">
+			        <md-icon class="starIcon" ng-if="song.canFavorite" md-svg-icon="files/icons/star-outline.svg"></md-icon>
+			        <md-icon class="starIcon" ng-if="!song.canFavorite" md-svg-icon="files/icons/star.svg"></md-icon>
+			    </md-button>
+		    </div>
+		    <div>
+		    	<audio preload="metadata" ng-src="{{song.src}}" controls></audio>
+		   	</div>
+		</div>
+	</div>
+</div>

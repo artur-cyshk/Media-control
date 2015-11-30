@@ -1,0 +1,71 @@
+<div ng-hide="visible" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div layout="row" ng-hide="!visible" layout-fill layout-sm="column" layout-align-gt-sm="start start" layout-align-sm="center center">
+	<div class="videoSearch">
+		<md-icon class="icon" md-svg-icon="files/icons/magnify.svg"></md-icon>
+		<md-input-container md-no-float layout="row">
+			<input  type="text" placeholder="name" ng-model="search.name" autocomplete="off">
+		</md-input-container>
+		<md-input-container md-no-float layout="row">
+			<input type="text" placeholder="year" autocomplete="off" ng-model="search.date">
+		</md-input-container>
+		<md-input-container md-no-float layout="row">
+			<md-select name="genre" class="ng-pristine ng-touched" tabindex="0" aria-disabled="false" role="combobox" placeholder="select genres(multiple)" ng-model="search.genre" multiple>
+				<md-option ng-repeat="genre in genres" value="{{genre.videoGenreName}}">
+					{{genre.videoGenreName}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container md-no-float layout="row">
+			<md-select name="actors" class="ng-pristine ng-touched" tabindex="0" placeholder="select actors(multiple)" ng-model="search.actors" multiple>
+				<md-option ng-repeat="actor in actors" value="{{actor.name}}">
+					{{actor.name}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container md-no-float layout="row">
+			<md-select name="director" class="ng-pristine ng-touched" tabindex="0" placeholder="select directors(multiple)" ng-model="search.director" multiple>
+				<md-option ng-repeat="director in directors" value="{{director.name}}">
+					{{director.name}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-button class="md-raised" ng-click="getSearchedVideos()">Search</md-button>
+		<div class="error" ng-hide="!searchFormError">
+			<p class="errorText">Enter at least one field</p>
+		</div>
+	</div>
+	<div ng-if="searching" layout="row" layout-sm="column" layout-align="space-around">
+    	<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	</div>
+	<div class="videos" ng-if="!searching">
+			<md-card class="videosCards" layout="row" layout-align="center center" ng-repeat="video in videos">
+		        <md-card-title>
+		          	<md-card-title-text>
+			            <span class="md-headline">
+			            	{{video.name}} 
+			            </span>	
+		            	<span class="md-subhead">{{video.country}}</span>
+		            </md-card-title-text>
+		            <md-card-title-media>
+			            <div class="md-media-xl card-media">
+			            	<a  ng-href="#/video/{{video.videoId}}"><img class="md-card-image videoImg" ng-src="files/videosPosters/{{video.posterUrl}}" alt="{{video.name}}"></a>
+			            </div>
+			        </md-card-title-media>
+				</md-card-title>
+			    <md-card-content>
+			    	<b> Premiere year : </b>{{video.date}}
+			    </md-card-content>     		
+		    </md-card>
+		<div class="error" ng-hide="!searchError">
+			<p class="errorText">No videos found</p>
+		</div>
+		<div class="error" ng-hide="!videoError">
+			<p class="errorText">No videos found</p>
+		</div>
+		<md-button class="nextItems md-raised" ng-hide="!visibleNext" ng-click='getVideos()'>
+			more videos
+		</md-button>
+	</div>
+</div>	

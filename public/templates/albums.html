@@ -1,0 +1,29 @@
+<div ng-hide="visible" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div ng-cloak ng-hide="!visible">
+	<div class="albums">
+		<md-card class="albumsCards" layout-align="center center" ng-repeat="album in albums">
+	        <md-card-title>
+	          	<md-card-title-text>
+	          		
+		            	<md-button ng-href="#/album/{{album.albumId}}">
+		            	<span class="md-headline">
+		            		{{album.name}} 
+		            		</md-span>
+		            	</md-button>
+	            </md-card-title-text>
+	            <md-card-title-media>
+		            <div class="md-media-xl card-media">
+		            	<a ng-href="#/album/{{album.albumId}}"><img class="albumImg" ng-src="files/albumPosters/{{album.posterUrl}}" alt="{{album.name}}"></a>
+		            </div>
+		        </md-card-title-media>
+			</md-card-title>
+		    <md-card-content>
+		    	<span><b>{{album.singers}}</b> </span>
+		    </md-card-content>     		
+	    </md-card>
+	    <md-button class="nextItems md-raised" ng-hide="!visibleNext" ng-click='getAlbums()'>more albums</md-button>
+    </div>
+</div>
+<p ng-hide="!albumError">Ни одного альбома не найдено</p>

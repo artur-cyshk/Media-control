@@ -1,0 +1,26 @@
+<md-dialog ng-cloak>
+	<md-dialog-content class="dialog">
+		<div layout="row" layout-align="end center">
+			<md-button ng-click="close()" class="md-icon-button" aria-label="favorite">
+			 	<md-icon md-svg-icon="files/icons/close.svg"></md-icon>
+			</md-button>
+		</div>
+		<md-input-container md-is-error="usernameError || usernameEmpty || usernameMinLength" class="md-block signUpInput">
+	    	<md-icon md-svg-src="files/icons/account-box.svg"></md-icon>
+	    	<input type="text" placeholder="username" name="usernameToRegistr" ng-change="checkUsernames()" ng-model="usernameToRegistr">
+		</md-input-container>
+		<div class="errorDiv" ng-hide="!usernameError">Username is already taken.</div>
+		<div class="errorDiv" ng-hide="!usernameMinLength">Min length : 4.</div>
+		<md-input-container md-is-error="notEqual || minLengthErr || passwordsEmpty"  class="md-block signUpInput">
+			<md-icon md-svg-src="files/icons/lock.svg"></md-icon>
+			<input type="password" placeholder="password" ng-change="checkPasswords()" ng-model="firstPassword">
+		</md-input-container>
+		<md-input-container md-is-error="notEqual || minLengthErr || passwordsEmpty"  class="md-block signUpInput">
+			<md-icon md-svg-src="files/icons/lock.svg"></md-icon>
+			<input type="password" placeholder="repeatPassword" ng-change="checkPasswords()" ng-model="secondPassword">	
+		</md-input-container>
+		<div class="errorDiv" ng-hide="!notEqual">Passwords are not equal.</div>	
+		<div class="errorDiv" ng-hide="!minLengthErr">Min length : 8.</div>	
+		<md-button class="singUpButton md-raised md-primary" ng-click="registration()">sing up</md-button>
+	</md-dialog-content>
+</md-dialog>

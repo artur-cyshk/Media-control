@@ -1,0 +1,23 @@
+<div class="wrapper" ng-cloak ng-hide="hide" md-theme="myTheme">
+		<header>
+				<md-toolbar class="md-primary">
+		      		<div class="md-toolbar-tools">
+				        	<md-button ng-href="#/home">home</md-button>
+							<md-button ng-click="loadVideos()">videos</md-button>
+							<md-button ng-href="#/albums">albums</md-button>
+							<md-button ng-href="#/profile">profile</md-button>
+							<md-button ng-href="/logout">logout</md-button>	
+							<span flex></span>
+							<md-input-container md-no-float layout="row" md-is-error="searchErr">
+								<md-button ng-click="rootSearch()" class="md-icon-button" aria-label="Search">
+						        	<md-icon md-svg-icon="files/icons/magnify.svg"></md-icon>
+						    	</md-button>
+						    	<input  type="text" placeholder="search" ng-change="errToFalse()" autocomplete="off"  id="search" ng-model="searchStr">
+						    </md-input-container>
+		      		</div>	
+		    	</md-toolbar>		
+		</header>
+		<main layout="row" flex>
+			<ui-view></ui-view>
+		</main>
+</div>

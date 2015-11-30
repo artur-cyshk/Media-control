@@ -1,0 +1,35 @@
+app.controller('RootCtrl', ['$scope','$state','$location','MainService','socket', function($scope,$state,$location,MainService,socket){
+	$scope.hide=true;
+	$scope.loadVideos=function(){
+		if($location.$$path=='/videos'){
+			$state.reload();
+		}else{
+			$location.url('/videos');
+		}
+	}
+	MainService.authorized().success(function(data,status){
+		$scope.hide=false;
+		getUser();
+	}).error(function(data,status){
+		if(status==403){
+			$location.url('/login');
+			return;
+		}
+	})
+	$scope.errToFalse=function(){
+		$scope.searchErr=false;
+	}	
+	$scope.rootSearch=function(){
+		if($scope.searchStr){
+			$location.url('/search/'+$scope.searchStr);
+		}else{
+			$scope.searchErr=true;
+		}
+	}
+	function getUser(){
+		MainService.user().success(function(data,status){
+			$scope.username=data.username;
+			$scope.userId=data.userId;	
+		})
+	}
+}]);

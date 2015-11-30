@@ -1,0 +1,89 @@
+<div ng-hide="visible" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div ng-cloak ng-hide="!visible">
+	<md-button class="md-warn profileButton md-raised" ng-click="showAdvanced($event)" flex-sm="100" flex-md="100" flex-gt-md="auto" layout-fill>{{currentUsername}} profile
+	</md-button>
+	<div layout="row" layout-sm="column">
+		<div ng-if="!videosNotFound || !albumsNotFound || !songsNotFound">
+			<md-icon class="starIcon favorityIcon" md-svg-icon="files/icons/star.svg"></md-icon>
+		</div>
+		<div ng-if="videosNotFound && albumsNotFound && songsNotFound" flex layout="row" layout-align="center center">
+			<md-icon class="starIcon favorityIcon" md-svg-icon="files/icons/star.svg"></md-icon>
+		</div>
+		<div>
+			
+		</div>
+		<div class="profileTabs" ng-hide="videosNotFound && albumsNotFound && songsNotFound">
+			<md-tabs md-dynamic-height md-border-bottom>
+				<md-tab ng-if="!videosNotFound" label="videos">
+					<div class="videos">
+						<md-card class="popularCards" ng-repeat="video in favoritesVideos">
+						    <md-card-title>
+						       	<md-card-title-text layout="row" layout-align="start center" class="profileTitleText">
+							        <span class="md-headline favoriteSpan">
+							          	{{video.name}} 
+							        </span>
+							         <md-button class="favoriteDeleteButton" ng-click="deleteFromFavorites(0,video.videoId)" class="md-icon-button" aria-label="favorite">
+										<md-icon md-svg-icon="files/icons/delete.svg"></md-icon>
+									</md-button>
+						        </md-card-title-text>
+						        <md-card-title-media>
+							        <div class="md-media-xl card-media">
+							          	<a  ng-href="#/video/{{video.videoId}}"><img class="md-card-image popularPosters" ng-src="{{video.posterUrl}}" alt="{{video.name}}"></a>
+							        </div>
+							    </md-card-title-media>
+							</md-card-title>
+						</md-card>
+					</div>
+				</md-tab>
+				<md-tab ng-if="!albumsNotFound" label="albums">
+					<div class="albums">
+						<md-card class="popularCards" layout="row" layout-align="center center" ng-repeat="album in favoritesAlbums">
+						    <md-card-title >
+						       	<md-card-title-text layout="row" layout-align="start center">
+							        <span class="md-headline favoriteSpan">
+							          	{{album.name}} 
+							        </span>
+							        <md-button class="favoriteDeleteButton" ng-click="deleteFromFavorites(1,album.albumId)" class="md-icon-button" aria-label="favorite">
+								        <md-icon md-svg-icon="files/icons/delete.svg"></md-icon>
+								    </md-button>
+						        </md-card-title-text>
+						        <md-card-title-media>
+							        <div class="md-media-xl card-media">
+							          	<a  ng-href="#/album/{{album.albumId}}"><img class="md-card-image popularAlbumPosters" ng-src="{{album.posterUrl}}" alt="{{album.name}}"></a>
+							        </div>
+							    </md-card-title-media>
+							</md-card-title>  		
+						</md-card>
+					</div>
+				</md-tab>
+				<md-tab ng-if="!songsNotFound" label="music">
+					<div ng-if="favoritesSongs.length>0" layout="column" layout-align="start center">
+						<div ng-repeat="song in favoritesSongs" layout="column">
+							<div layout="row" layout-align="center center">
+								<div layout="column" class="songNameDiv" layout-align="center center">
+									<div class="songNameSpan">{{song.singers}} - <b>{{song.name}}</b></div>
+								</div>
+								<md-button ng-click="likeSong(song.songId)" class="md-icon-button" aria-label="Like">
+							        <md-icon class="heartIcon" ng-if="song.canLike" md-svg-icon="files/icons/heart-outline.svg"></md-icon>
+							        <md-icon class="heartIcon" ng-if="!song.canLike" md-svg-icon="files/icons/heart.svg"></md-icon>
+							        {{song.songLikes}}
+							    </md-button>
+								<md-button ng-click="deleteFromFavorites(2,song.songId)" class="md-icon-button" aria-label="favorite">
+							        <md-icon md-svg-icon="files/icons/delete.svg"></md-icon>
+							    </md-button>
+						    </div>
+						    <div>
+						    	<audio preload="metadata" ng-src="{{song.src}}" controls></audio>
+						   	</div>
+						</div>
+					</div>
+				</md-tab>
+			</md-tabs>
+		</div>
+	</div>
+	<div class="error" ng-if="videosNotFound && albumsNotFound && songsNotFound">
+			<p class="errorText">No favorites found</p>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<div ng-hide="visible" layout="row" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div>
+<div layout="row" class="albumDiv" layout-sm="column" layout-align="center start" ng-cloak ng-hide="!visible">	
+	<div layout="row" layout-sm="column">
+		<div>
+			<img src="{{album.posterUrl}}" alt="">
+		</div>
+		<div>
+			<md-button ng-click="favoriteAlbum()" class="md-icon-button" aria-label="favorite">
+		        <md-icon class="starIcon" ng-if="album.canBeFavorite" md-svg-icon="files/icons/star-outline.svg"></md-icon>
+		        <md-icon class="starIcon" ng-if="!album.canBeFavorite" md-svg-icon="files/icons/star.svg"></md-icon>
+		    </md-button>
+			<span class="albumInfo"><b>Name:</b> {{album.name}}</span>
+			<span class="albumInfo"><b>Country:</b> {{album.country}}</span>
+			<span class="albumInfo"><b>Production date:</b> {{album.date}}</span>
+			<span class="albumInfo"><b>Description:</b> 
+				<div class="descriptionDiv">
+					<div class="descriptionSpan">{{album.description}}</div>
+				</div>
+			</span>
+			<span class="albumInfo" layout="row" layout-align="start start">
+				<b>Singers: </b>
+				<div>
+					<p class="singers" ng-repeat="singer in album.singers">{{singer.name}}</p>
+				</div>	
+			</span>
+		</div>
+	</div>
+	<div ng-if="album.songs.length>0" layout="column" layout-align="center">
+		<div layout="row" layout-align="center"><h1>Playlist</h1></div>
+		<div ng-repeat="song in album.songs" layout="column">
+			<div layout="row" layout-align="center center">
+				<div layout="column" class="songNameDiv" layout-align="center center">
+					<div class="songNameSpan">{{song.name}}</div>
+				</div>
+				<md-button ng-click="likeSong(song.songId)" class="md-icon-button" aria-label="Like">
+			        <md-icon class="heartIcon" ng-if="song.canLike" md-svg-icon="files/icons/heart-outline.svg"></md-icon>
+			        <md-icon class="heartIcon" ng-if="!song.canLike" md-svg-icon="files/icons/heart.svg"></md-icon>
+			        {{song.songLikes}}
+			    </md-button>
+				<md-button ng-click="favoriteSong(song.songId)" class="md-icon-button" aria-label="favorite">
+			        <md-icon class="starIcon" ng-if="song.canFavorite" md-svg-icon="files/icons/star-outline.svg"></md-icon>
+			        <md-icon class="starIcon" ng-if="!song.canFavorite" md-svg-icon="files/icons/star.svg"></md-icon>
+			    </md-button>
+		    </div>
+		    <div>
+		    	<audio preload="metadata" ng-src="{{song.src}}" controls></audio>
+		    </div>
+		</div>
+	</div>
+</div>
