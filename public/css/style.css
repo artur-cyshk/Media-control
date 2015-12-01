@@ -1,12 +1,31 @@
 
 * {
-    font-family: tahoma, arial, verdana, sans-serif, Lucida Sans;
+    font-family: monospace,tahoma, arial, verdana, sans-serif, Lucida Sans;
     font-size: 14px;
 }
 .profileButton{
 	margin:0 !important; 
 	margin-top:5px !important;
 	padding: 0 !important;
+}
+a{	text-decoration: none;
+	color:white;
+}
+.searchVideosButton{
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.videoLink{
+	color:white;
+}
+.headerDiv{
+	background:#106CC8;
+	overflow: hidden;
+	min-width: 250px;
+}
+.headerDiv a>div{
+	margin-top: 9px;
+	color:white;
 }
 .changeInput,.signUpInput{
 	margin-bottom: 0;

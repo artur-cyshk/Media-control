@@ -31,7 +31,7 @@
 				</md-option>
 			</md-select>
 		</md-input-container>
-		<md-button class="md-raised" ng-click="getSearchedVideos()">Search</md-button>
+		<md-button class="md-raised md-primary searchVideosButton layout-fill" ng-click="getSearchedVideos()">Search</md-button>
 		<div class="error" ng-hide="!searchFormError">
 			<p class="errorText">Enter at least one field</p>
 		</div>
@@ -64,7 +64,7 @@
 		<div class="error" ng-hide="!videoError">
 			<p class="errorText">No videos found</p>
 		</div>
-		<md-button class="nextItems md-raised" ng-hide="!visibleNext" ng-click='getVideos()'>
+		<md-button  class="nextItems md-primary md-raised" ng-hide="!visibleNext" ng-click='getVideos()'>
 			more videos
 		</md-button>
 	</div>

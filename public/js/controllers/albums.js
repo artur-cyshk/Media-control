@@ -2,6 +2,7 @@ app.controller('AlbumsCtrl', ['$scope','MainService','$location','$stateParams',
 	MainService.authorized().success(function(data,status){
 		postAlbums(1);
 	});
+
 	$scope.getAlbums=function(){
 		postAlbums($scope.page);
 	}
@@ -19,7 +20,7 @@ app.controller('AlbumsCtrl', ['$scope','MainService','$location','$stateParams',
 			data.forEach(function(item){
 				item.singers=item.singers.map(function(item){
 					return item;
-				}).join(',');
+				}).join(', ');
 				$scope.albums.push(item);
 			})
 			postData.page=postData.page+1;

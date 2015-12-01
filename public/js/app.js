@@ -4,14 +4,15 @@ var app = angular.module('media', [
 
 app.config(['$urlRouterProvider', '$stateProvider','$mdThemingProvider', function($urlRouterProvider, $stateProvider,$mdThemingProvider) {
         $mdThemingProvider.theme('myTheme','default')
-        .primaryPalette('green',{
+        .primaryPalette('indigo',{
             'default':'900'
         })
         .warnPalette('red',{
             'default':'900'
         })
-        .backgroundPalette('blue',{
-            'default': '900'
+        .backgroundPalette('grey',{
+            'default': '200',
+            'hue-1': '100'
         });
         $urlRouterProvider.otherwise('/home');
         $stateProvider
